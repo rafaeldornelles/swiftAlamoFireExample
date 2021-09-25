@@ -8,9 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var viewModel = ToDosViewModel()
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack{
+            if(viewModel.isLoading){
+                ProgressView()
+            }else{
+                List(viewModel.toDos){ todo in
+                    Text(todo.title ?? "")
+                }
+            }
+        }
     }
 }
 
